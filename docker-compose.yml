@@ -118,7 +118,7 @@ services:
       build:
         context: ./docker/php-worker
         args:
-          - PHP_VERSION=${PHP_VERSION}
+          - LARADOCK_PHP_VERSION=${PHP_VERSION}
           - INSTALL_PGSQL=${PHP_WORKER_INSTALL_PGSQL}
           - INSTALL_BCMATH=${PHP_WORKER_INSTALL_BCMATH}
           - INSTALL_SOAP=${PHP_WORKER_INSTALL_SOAP}
