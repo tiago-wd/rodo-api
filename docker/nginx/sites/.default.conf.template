@@ -8,7 +8,7 @@ server {
   # ssl_certificate /etc/nginx/ssl/default.crt;
   # ssl_certificate_key /etc/nginx/ssl/default.key;
 
-  server_name local.rodofrete.com.br;
+  server_name ${SERVER_NAME};
   root        /var/www/public;
   index       index.php index.html index.htm;
 
@@ -47,6 +47,6 @@ server {
     log_not_found off;
   }
 
-  error_log /var/log/nginx/local.rodofrete.com.br_error.log;
-  access_log /var/log/nginx/local.rodofrete.com.br_access.log;
+  error_log /var/log/nginx/${SERVER_NAME}_error.log;
+  access_log /var/log/nginx/${SERVER_NAME}_access.log;
 }

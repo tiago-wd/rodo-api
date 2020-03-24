@@ -1,4 +1,8 @@
-version: '3'
+version: '3.7'
+
+
+
+### Networks Setup ############################################
 
 networks:
   frontend:
@@ -6,41 +10,35 @@ networks:
   backend:
     driver: ${NETWORKS_DRIVER}
 
+### Volumes Setup #############################################
+
 volumes:
-  mysql:
-    driver: ${VOLUMES_DRIVER}
-  memcached:
-    driver: ${VOLUMES_DRIVER}
-  mariadb:
+  postgres:
     driver: ${VOLUMES_DRIVER}
 
 services:
 
-### Workspace Utilities ##################################
+### Workspace Utilities Container ###########################
+
     workspace:
       build:
         context: ./docker/workspace
         args:
           - LARADOCK_PHP_VERSION=${PHP_VERSION}
-          - INSTALL_SUBVERSION=${WORKSPACE_INSTALL_SUBVERSION}
-          - INSTALL_XDEBUG=${WORKSPACE_INSTALL_XDEBUG}
-          - INSTALL_SSH2=${WORKSPACE_INSTALL_SSH2}
-          - INSTALL_GMP=${WORKSPACE_INSTALL_GMP}
-          - INSTALL_SOAP=${WORKSPACE_INSTALL_SOAP}
-          - INSTALL_LDAP=${WORKSPACE_INSTALL_LDAP}
-          - INSTALL_PHPREDIS=${WORKSPACE_INSTALL_PHPREDIS}
-          - INSTALL_NODE=${WORKSPACE_INSTALL_NODE}
-          - INSTALL_NPM_GULP=${WORKSPACE_INSTALL_NPM_GULP}
-          - INSTALL_NPM_BOWER=${WORKSPACE_INSTALL_NPM_BOWER}
           - COMPOSER_GLOBAL_INSTALL=${WORKSPACE_COMPOSER_GLOBAL_INSTALL}
+          - COMPOSER_REPO_PACKAGIST=${WORKSPACE_COMPOSER_REPO_PACKAGIST}
+          - INSTALL_NODE=${WORKSPACE_INSTALL_NODE}
+          - NODE_VERSION=${WORKSPACE_NODE_VERSION}
+          - INSTALL_XDEBUG=${WORKSPACE_INSTALL_XDEBUG}
+          - NPM_REGISTRY=${WORKSPACE_NPM_REGISTRY}
+          - INSTALL_YARN=${WORKSPACE_INSTALL_YARN}
+          - INSTALL_PHPREDIS=${WORKSPACE_INSTALL_PHPREDIS}
           - INSTALL_WORKSPACE_SSH=${WORKSPACE_INSTALL_WORKSPACE_SSH}
+          - INSTALL_LARAVEL_ENVOY=${WORKSPACE_INSTALL_LARAVEL_ENVOY}
           - INSTALL_LARAVEL_INSTALLER=${WORKSPACE_INSTALL_LARAVEL_INSTALLER}
-          - INSTALL_DEPLOYER=${WORKSPACE_INSTALL_DEPLOYER}
-          - INSTALL_MYSQL_CLIENT=${WORKSPACE_INSTALL_MYSQL_CLIENT}
+          - INSTALL_IMAGEMAGICK=${WORKSPACE_INSTALL_IMAGEMAGICK}
           - PUID=${WORKSPACE_PUID}
           - PGID=${WORKSPACE_PGID}
-          - CHROME_DRIVER_VERSION=${WORKSPACE_CHROME_DRIVER_VERSION}
-          - NODE_VERSION=${WORKSPACE_NODE_VERSION}
           - TZ=${WORKSPACE_TIMEZONE}
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
@@ -51,114 +49,53 @@ services:
       tty: true
       environment:
         - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
-        - DOCKER_HOST=tcp://docker-in-docker:2375
+        # - DOCKER_HOST=tcp://docker-in-docker:2375
       networks:
         - frontend
         - backend
-      links:
-        - docker-in-docker
-        - mysql
+      # links:
+        # - docker-in-docker
 
-### PHP-FPM ##############################################
+### PHP-FPM Container #######################################
+
     php-fpm:
       build:
         context: ./docker/php-fpm
         args:
           - LARADOCK_PHP_VERSION=${PHP_VERSION}
-          - INSTALL_XDEBUG=${PHP_FPM_INSTALL_XDEBUG}
-          - INSTALL_PHPDBG=${PHP_FPM_INSTALL_PHPDBG}
-          - INSTALL_SSH2=${PHP_FPM_INSTALL_SSH2}
-          - INSTALL_SOAP=${PHP_FPM_INSTALL_SOAP}
-          - INSTALL_IMAP=${PHP_FPM_INSTALL_IMAP}
-          - INSTALL_MONGO=${PHP_FPM_INSTALL_MONGO}
-          - INSTALL_AMQP=${PHP_FPM_INSTALL_AMQP}
-          - INSTALL_MSSQL=${PHP_FPM_INSTALL_MSSQL}
           - INSTALL_ZIP_ARCHIVE=${PHP_FPM_INSTALL_ZIP_ARCHIVE}
-          - INSTALL_BCMATH=${PHP_FPM_INSTALL_BCMATH}
-          - INSTALL_GMP=${PHP_FPM_INSTALL_GMP}
-          - INSTALL_PHPREDIS=${PHP_FPM_INSTALL_PHPREDIS}
-          - INSTALL_MEMCACHED=${PHP_FPM_INSTALL_MEMCACHED}
-          - INSTALL_OPCACHE=${PHP_FPM_INSTALL_OPCACHE}
-          - INSTALL_EXIF=${PHP_FPM_INSTALL_EXIF}
-          - INSTALL_MYSQLI=${PHP_FPM_INSTALL_MYSQLI}
-          - INSTALL_PGSQL=${PHP_FPM_INSTALL_PGSQL}
-          - INSTALL_PG_CLIENT=${PHP_FPM_INSTALL_PG_CLIENT}
+          - INSTALL_XDEBUG=${PHP_FPM_INSTALL_XDEBUG}
           - INSTALL_INTL=${PHP_FPM_INSTALL_INTL}
-          - INSTALL_GHOSTSCRIPT=${PHP_FPM_INSTALL_GHOSTSCRIPT}
-          - INSTALL_LDAP=${PHP_FPM_INSTALL_LDAP}
-          - INSTALL_PHALCON=${PHP_FPM_INSTALL_PHALCON}
-          - INSTALL_SWOOLE=${PHP_FPM_INSTALL_SWOOLE}
-          - INSTALL_IMAGE_OPTIMIZERS=${PHP_FPM_INSTALL_IMAGE_OPTIMIZERS}
           - INSTALL_IMAGEMAGICK=${PHP_FPM_INSTALL_IMAGEMAGICK}
-          - INSTALL_CALENDAR=${PHP_FPM_INSTALL_CALENDAR}
-          - INSTALL_FAKETIME=${PHP_FPM_INSTALL_FAKETIME}
-          - INSTALL_IONCUBE=${PHP_FPM_INSTALL_IONCUBE}
-          - INSTALL_YAML=${PHP_FPM_INSTALL_YAML}
+          - INSTALL_IMAGE_OPTIMIZERS=${PHP_FPM_INSTALL_IMAGE_OPTIMIZERS}
+          - INSTALL_PHPREDIS=${PHP_FPM_INSTALL_PHPREDIS}
+          - INSTALL_WKHTMLTOPDF=${PHP_FPM_INSTALL_WKHTMLTOPDF}
+          - INSTALL_GD_ARCHIVE=${PHP_FPM_INSTALL_GD_ARCHIVE}
+          - INSTALL_XML_ARCHIVE=${PHP_FPM_INSTALL_XML_ARCHIVE}
+          - INSTALL_BCMATH=${PHP_FPM_INSTALL_BCMATH}
       volumes:
         - ./docker/php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
       expose:
         - "9000"
+      depends_on:
+        - workspace
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
       environment:
         - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
-        - DOCKER_HOST=tcp://docker-in-docker:2375
         - FAKETIME=${PHP_FPM_FAKETIME}
-      depends_on:
-        - workspace
+        # - DOCKER_HOST=tcp://docker-in-docker:2375
       networks:
         - backend
-      links:
-        - docker-in-docker
-        - mysql
 
-### PHP Worker ############################################
-    php-worker:
-      build:
-        context: ./docker/php-worker
-        args:
-          - LARADOCK_PHP_VERSION=${PHP_VERSION}
-          - INSTALL_PGSQL=${PHP_WORKER_INSTALL_PGSQL}
-          - INSTALL_BCMATH=${PHP_WORKER_INSTALL_BCMATH}
-          - INSTALL_SOAP=${PHP_WORKER_INSTALL_SOAP}
-          - INSTALL_ZIP_ARCHIVE=${PHP_WORKER_INSTALL_ZIP_ARCHIVE}
-      volumes:
-        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
-        - ./docker/php-worker/supervisord.d:/etc/supervisord.d
-      depends_on:
-        - workspace
-      extra_hosts:
-        - "dockerhost:${DOCKER_HOST_IP}"
-      networks:
-        - backend
-### Laravel Horizon ############################################
-#    laravel-horizon:
-#      build:
-#        context: ./laravel-horizon
-#        args:
-#          - PHP_VERSION=${PHP_VERSION}
-#          - INSTALL_PGSQL=${PHP_FPM_INSTALL_PGSQL}
-#          - INSTALL_BCMATH=${PHP_FPM_INSTALL_BCMATH}
-#          - INSTALL_MEMCACHED=${PHP_FPM_INSTALL_MEMCACHED}
-#      volumes:
-#        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
-#        - ./laravel-horizon/supervisord.d:/etc/supervisord.d
-#      depends_on:
-#        - workspace
-#      extra_hosts:
-#        - "dockerhost:${DOCKER_HOST_IP}"
-#      networks:
-#        - backend
+### Nginx Server Container ##################################
 
-### NGINX Server #########################################
     nginx:
       build:
         context: ./docker/nginx
         args:
-          - PHP_UPSTREAM_CONTAINER=${NGINX_PHP_UPSTREAM_CONTAINER}
-          - PHP_UPSTREAM_PORT=${NGINX_PHP_UPSTREAM_PORT}
-          - CHANGE_SOURCE=${CHANGE_SOURCE}
+          - PHP_UPSTREAM=php-fpm
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
         - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
@@ -169,59 +106,77 @@ services:
         - "${NGINX_HOST_HTTPS_PORT}:443"
       depends_on:
         - php-fpm
+      environment:
+        - SERVER_NAME=${SERVER_NAME}
+      #é a única forma de passar variáveis de ambiente para a conf do nginx, lembre-se de escapar com $$ as variáveis
+      command: /bin/bash -c "envsubst '$$SERVER_NAME' < /etc/nginx/sites-available/.default.conf.template > /etc/nginx/sites-available/default.conf && exec nginx"
       networks:
         - frontend
         - backend
 
-### MySQL ################################################
-    mysql:
-      build:
-        context: ./docker/mysql
-        args:
-          - MYSQL_VERSION=${MYSQL_VERSION}
-      environment:
-        - MYSQL_DATABASE=${MYSQL_DATABASE}
-        - MYSQL_USER=${MYSQL_USER}
-        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-        - TZ=${WORKSPACE_TIMEZONE}
+
+### PostgreSQL PostGis Container ############################
+
+    postgres:
+      build: ./docker/postgres
       volumes:
-        - mysql:/var/lib/mysql
-        - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+        - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data
+        # - ${POSTGRES_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
       ports:
-        - "${MYSQL_PORT}:3306"
+        - "${POSTGRES_PORT}:5432"
+      environment:
+        - POSTGRES_DB=${DB_DATABASE}
+        - POSTGRES_USER=${DB_USERNAME}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
       networks:
         - backend
 
-### Redis ################################################
-#    redis:
-#      build: ./redis
-#      volumes:
-#        - ${DATA_PATH_HOST}/redis:/data
-#      ports:
-#        - "${REDIS_PORT}:6379"
-#      networks:
-#        - backend
+### PHP Worker Container #####################################
+    php-worker:
+      build:
+        context: ./docker/php-worker
+        args:
+          - PHP_VERSION=${PHP_VERSION}
+          - INSTALL_PGSQL=${PHP_WORKER_INSTALL_PGSQL}
+          - PUID=${PHP_WORKER_PUID}
+          - PGID=${PHP_WORKER_PGID}
+          - INSTALL_BCMATH=${PHP_WORKER_INSTALL_BCMATH}
 
-### Memcached ############################################
-#    memcached:
-#      build: ./memcached
-#      volumes:
-#        - ${DATA_PATH_HOST}/memcached:/var/lib/memcached
-#      ports:
-#        - "${MEMCACHED_HOST_PORT}:11211"
-#      depends_on:
-#        - php-fpm
-#      networks:
-#        - backend
-
-### Docker-in-Docker ################################################
-    docker-in-docker:
-      image: docker:dind
-      privileged: true
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
-      expose:
-        - 2375
+        - ./docker/php-worker/supervisord.d:/etc/supervisord.d
+      depends_on:
+        - workspace
+      extra_hosts:
+        - "dockerhost:${DOCKER_HOST_IP}"
       networks:
         - backend
+      environment:
+        - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
+### pgAdmin Container #######################################
+
+    pgadmin:
+      build: ./docker/pgadmin
+      environment:
+        - "PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org"
+        - "PGADMIN_DEFAULT_PASSWORD=password"
+      ports:
+        - "5050:5050"
+      depends_on:
+        - postgres
+      volumes:
+        - ${DATA_PATH_HOST}/pgadmin:/var/lib/pgadmin
+      networks:
+        - frontend
+        - backend
+
+# ### Docker-in-Docker ################################################
+#     docker-in-docker:
+#       image: docker:dind
+#       privileged: true
+#       volumes:
+#         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
+#       expose:
+#         - 2375
+#       networks:
+#         - backend

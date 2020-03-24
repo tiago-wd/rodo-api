@@ -1,1 +1,2 @@
 *.conf
+!laravel-worker.conf
