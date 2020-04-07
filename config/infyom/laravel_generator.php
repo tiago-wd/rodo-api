@@ -53,9 +53,9 @@ return [
 
         'view_provider'     => app_path('Providers/ViewServiceProvider.php'),
 
-        'api_controller_name_suffix' => 'ApiController',
+        'api_controller_name_suffix' => 'Controller',
 
-        'api_request_name_suffix' => 'ApiRequest',
+        'api_request_name_suffix' => 'Request',
 
         'model_name_suffix' => 'Model',
 
@@ -91,9 +91,9 @@ return [
 
         'tests'             => 'Tests',
 
-        'api_controller_name_suffix' => 'ApiController',
+        'api_controller_name_suffix' => 'Controller',
 
-        'api_request_name_suffix' => 'ApiRequest'
+        'api_request_name_suffix' => 'Request'
     ],
 
     /*

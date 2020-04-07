@@ -27,6 +27,7 @@ class CreateDbRodofrete extends Migration
             $table->string('name');
             
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create("transports", function (Blueprint $table) {
@@ -40,6 +41,7 @@ class CreateDbRodofrete extends Migration
             $table->foreign('transport_type_id')->references('id')->on('transport_types');
             
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create("cargo_types", function (Blueprint $table) {
@@ -47,6 +49,7 @@ class CreateDbRodofrete extends Migration
             $table->string('name');
             
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create("cargos", function (Blueprint $table) {
@@ -62,6 +65,7 @@ class CreateDbRodofrete extends Migration
             $table->foreign('cargo_type_id')->references('id')->on('cargo_types');
             
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('cargo_transports', function (Blueprint $table) {
@@ -74,6 +78,7 @@ class CreateDbRodofrete extends Migration
             $table->foreign('cargo_type_id')->references('id')->on('cargo_types');
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('attachments', function (Blueprint $table) {
@@ -96,7 +101,7 @@ class CreateDbRodofrete extends Migration
             $table->string('model_typer', 64);
             
             $table->timestamps();
-            
+            $table->softDeletes();            
         });
         
         Schema::table('users', function (Blueprint $table) {
@@ -124,6 +129,7 @@ class CreateDbRodofrete extends Migration
             $table->string('status');
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
     }
