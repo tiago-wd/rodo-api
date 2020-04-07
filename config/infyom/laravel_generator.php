@@ -52,6 +52,14 @@ return [
         'factory'           => database_path('factories/'),
 
         'view_provider'     => app_path('Providers/ViewServiceProvider.php'),
+
+        'api_controller_name_suffix' => 'ApiController',
+
+        'api_request_name_suffix' => 'ApiRequest',
+
+        'model_name_suffix' => 'Model',
+
+        'repository_name_suffix' => 'Repository',
     ],
 
     /*
@@ -82,6 +90,10 @@ return [
         'api_test'          => 'Tests\Apis',
 
         'tests'             => 'Tests',
+
+        'api_controller_name_suffix' => 'ApiController',
+
+        'api_request_name_suffix' => 'ApiRequest'
     ],
 
     /*
