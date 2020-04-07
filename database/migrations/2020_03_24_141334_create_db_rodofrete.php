@@ -63,6 +63,9 @@ class CreateDbRodofrete extends Migration
             
             $table->integer('cargo_type_id')->unsigned();
             $table->foreign('cargo_type_id')->references('id')->on('cargo_types');
+
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             
             $table->timestamps();
             $table->softDeletes();

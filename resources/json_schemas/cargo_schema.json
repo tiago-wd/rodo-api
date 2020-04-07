@@ -19,13 +19,55 @@
     "searchable": true
   },
   {
-    "type": "relation",
-    "relation": "1tm,Transport,transport_type_id,id"
+    "name": "description",
+    "dbType": "string",
+    "htmlType": "textarea",
+    "validations": "required",
+    "searchable": true
   },
   {
-    "name": "cargo_transports",
+    "name": "weight",
+    "dbType": "string",
+    "htmlType": "text",
+    "validations": "required",
+    "searchable": true
+  },
+  {
+    "name": "price",
+    "dbType": "string",
+    "htmlType": "text",
+    "validations": "required",
+    "searchable": true
+  },
+  {
+    "name": "from_where",
+    "dbType": "string",
+    "htmlType": "text",
+    "validations": "required",
+    "searchable": true
+  },
+  {
+    "name": "to_where",
+    "dbType": "string",
+    "htmlType": "text",
+    "validations": "required",
+    "searchable": true
+  },
+  {
+    "name": "cargo_type_id",
+    "dbType": "integer:unsigned:default,0:foreign,cargo_type_id,id",
+    "htmlType": "text",
+    "relation": "mt1,CargoType,cargo_type_id,id"
+  },
+  {
+    "name": "user_id",
+    "dbType": "integer:unsigned:default,0:foreign,user_id,id",
+    "htmlType": "text",
+    "relation": "mt1,User,user_id,id"
+  },
+  {
     "type": "relation",
-    "relation": "mtm,CargoTransport,cargo_transports,cargo_type_id,transport_type_id"
+    "relation": "1tm,Bid,cargo_id,id"
   },
   {
     "name": "created_at",

@@ -113,6 +113,11 @@
     "inIndex": true
   },
   {
+    "name": "cargos",
+    "type": "relation",
+    "relation": "mt1,Cargo,cargos,cargo_id,id"
+  },
+  {
     "name": "users",
     "type": "relation",
     "relation": "mtm,Role,user_roles,user_id,role_id"
