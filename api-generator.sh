@@ -1,1 +1,1 @@
-php artisan infyom:api_scaffold User --fieldsFile= --factory --seeder
+dcartisan infyom:api_scaffold User --fieldsFile=resources/json_schemas/user_schema.json --factory --seeder --paginate=10 --skip=migration

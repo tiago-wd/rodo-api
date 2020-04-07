@@ -25,15 +25,15 @@ return [
 
         'request'           => app_path('Http/Requests/'),
 
-        'api_request'       => app_path('Http/Requests/API/'),
+        'api_request'       => app_path('Http/Requests/Api/'),
 
         'controller'        => app_path('Http/Controllers/'),
 
-        'api_controller'    => app_path('Http/Controllers/API/'),
+        'api_controller'    => app_path('Http/Controllers/Api/'),
 
         'repository_test'   => base_path('tests/Repositories/'),
 
-        'api_test'          => base_path('tests/APIs/'),
+        'api_test'          => base_path('tests/Apis/'),
 
         'tests'             => base_path('tests/'),
 
@@ -71,15 +71,15 @@ return [
 
         'controller'        => 'App\Http\Controllers',
 
-        'api_controller'    => 'App\Http\Controllers\API',
+        'api_controller'    => 'App\Http\Controllers\Api',
 
         'request'           => 'App\Http\Requests',
 
-        'api_request'       => 'App\Http\Requests\API',
+        'api_request'       => 'App\Http\Requests\Api',
 
         'repository_test'   => 'Tests\Repositories',
 
-        'api_test'          => 'Tests\APIs',
+        'api_test'          => 'Tests\Apis',
 
         'tests'             => 'Tests',
     ],
@@ -104,7 +104,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | API routes prefix & version
+    | Api routes prefix & version
     |--------------------------------------------------------------------------
     |
     */

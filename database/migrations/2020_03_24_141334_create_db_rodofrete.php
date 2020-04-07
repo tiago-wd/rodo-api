@@ -100,11 +100,11 @@ class CreateDbRodofrete extends Migration
         });
         
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('transport_id')->unsigned()->after('id');
+            $table->integer('transport_id')->unsigned()->after('id')->nullable();
             $table->foreign('transport_id')->references('id')->on('transports');
-            $table->string('cnh', 24)->after('email');
-            $table->string('identity_number', 24)->after('cnh');
-            $table->string('fone', 24)->after('fone');
+            $table->string('cnh', 24)->after('email')->nullable();
+            $table->string('identity_number', 24)->after('cnh')->nullable();
+            $table->string('fone', 24)->after('fone')->nullable();
         });
 
         Schema::create('bids', function (Blueprint $table) {

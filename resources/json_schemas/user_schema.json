@@ -44,21 +44,12 @@
   {
     "name": "avatar",
     "dbType": "string",
-    "htmlType": "password",
+    "htmlType": "text",
     "validations": "nullable",
     "searchable": false,
     "inForm": false,
     "inIndex": false,
     "inView": false
-  },
-  {
-    "fieldInput": "active",
-    "htmlType": "boolean",
-    "searchable": false,
-    "fillable": true,
-    "primary": false,
-    "inForm": true,
-    "inIndex": true
   },
   {
     "name": "activation_token",
@@ -81,7 +72,7 @@
   {
     "name": "cnh",
     "dbType": "string",
-    "htmlType": "hidden",
+    "htmlType": "text",
     "searchable": false,
     "inForm": false,
     "inIndex": false,
@@ -90,7 +81,7 @@
   {
     "name": "identity_number",
     "dbType": "string",
-    "htmlType": "hidden",
+    "htmlType": "text",
     "searchable": false,
     "inForm": false,
     "inIndex": false,
@@ -99,9 +90,9 @@
   {
     "name": "fone",
     "dbType": "string",
-    "htmlType": "hidden",
+    "htmlType": "text",
     "searchable": false,
-    "inForm": false,
+    "inForm": true,
     "inIndex": false,
     "inView": false
   },
@@ -110,6 +101,21 @@
     "dbType": "integer:unsigned:default,0:foreign,transports,id",
     "htmlType": "text",
     "relation": "mt1,Transport,transport_id,id"
+  },
+  {
+    "name": "active",
+    "dbType": "boolean",
+    "htmlType": "checkbox,1",
+    "searchable": false,
+    "fillable": true,
+    "primary": false,
+    "inForm": true,
+    "inIndex": true
+  },
+  {
+    "name": "users",
+    "type": "relation",
+    "relation": "mtm,Role,user_roles,user_id,role_id"
   },
   {
     "name": "created_at",
