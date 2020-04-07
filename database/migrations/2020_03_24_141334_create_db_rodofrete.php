@@ -1,8 +1,8 @@
 <?php
 
-use App\Helpers\EnumHelper;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateDbRodofrete extends Migration
@@ -14,6 +14,14 @@ class CreateDbRodofrete extends Migration
      */
     public function up()
     {
+
+        Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('_text', 'string');
+
+        DB::statement('CREATE EXTENSION IF NOT EXISTS tablefunc;');
+        DB::statement('CREATE EXTENSION IF NOT EXISTS postgis;');
+        DB::statement('CREATE EXTENSION IF NOT EXISTS pg_trgm;');
+        DB::statement('CREATE EXTENSION IF NOT EXISTS unaccent;');
+
         Schema::create("transport_types", function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -82,7 +90,7 @@ class CreateDbRodofrete extends Migration
             $table->integer('filesize');
             $table->string('key', 64);
             $table->string('title', 92);
-            $table->text('description');
+            $table->string('description');
             $table->string('preview_url', 512);
             $table->integer('model_id');
             $table->string('model_typer', 64);
@@ -127,12 +135,6 @@ class CreateDbRodofrete extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transport_types');
-        Schema::dropIfExists('transports');
-        Schema::dropIfExists('cargo_types');
-        Schema::dropIfExists('cargos');
-        Schema::dropIfExists('cargo_transports');
-        Schema::dropIfExists('attachments');
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('transport_id');
             $table->dropColumn('cnh');
@@ -140,5 +142,11 @@ class CreateDbRodofrete extends Migration
             $table->dropColumn('fone');
         });
         Schema::dropIfExists('bids');
+        Schema::dropIfExists('transports');
+        Schema::dropIfExists('cargos');
+        Schema::dropIfExists('cargo_transports');
+        Schema::dropIfExists('transport_types');
+        Schema::dropIfExists('cargo_types');
+        Schema::dropIfExists('attachments');
     }
 }

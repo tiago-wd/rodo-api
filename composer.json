@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.1",
+        "mstaack/laravel-postgis": "^5.0",
         "spatie/laravel-permission": "^3.11"
     },
     "require-dev": {

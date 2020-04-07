@@ -1,0 +1,147 @@
+[
+  {
+    "name": "id",
+    "dbType": "increments",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": true,
+    "inForm": false,
+    "inIndex": false,
+    "inView": false
+  },
+  {
+    "name": "name",
+    "dbType": "string",
+    "htmlType": "text",
+    "validations": "required",
+    "searchable": true
+  },
+  {
+    "name": "email",
+    "dbType": "string",
+    "htmlType": "text",
+    "validations": "required",
+    "searchable": true
+  },
+  {
+    "name": "email_verified_at",
+    "dbType": "dateTime",
+    "htmlType": "date",
+    "validations": "nullable",
+    "searchable": true
+  },
+  {
+    "name": "password",
+    "dbType": "string",
+    "htmlType": "password",
+    "searchable": false,
+    "inForm": false,
+    "inIndex": false,
+    "inView": false
+  },
+  {
+    "name": "avatar",
+    "dbType": "string",
+    "htmlType": "password",
+    "validations": "nullable",
+    "searchable": false,
+    "inForm": false,
+    "inIndex": false,
+    "inView": false
+  },
+  {
+    "fieldInput": "active",
+    "htmlType": "boolean",
+    "searchable": false,
+    "fillable": true,
+    "primary": false,
+    "inForm": true,
+    "inIndex": true
+  },
+  {
+    "name": "activation_token",
+    "dbType": "string",
+    "htmlType": "hidden",
+    "searchable": false,
+    "inForm": false,
+    "inIndex": false,
+    "inView": false
+  },
+  {
+    "name": "remember_token",
+    "dbType": "string",
+    "htmlType": "hidden",
+    "searchable": false,
+    "inForm": false,
+    "inIndex": false,
+    "inView": false
+  },
+  {
+    "name": "cnh",
+    "dbType": "string",
+    "htmlType": "hidden",
+    "searchable": false,
+    "inForm": false,
+    "inIndex": false,
+    "inView": false
+  },
+  {
+    "name": "identity_number",
+    "dbType": "string",
+    "htmlType": "hidden",
+    "searchable": false,
+    "inForm": false,
+    "inIndex": false,
+    "inView": false
+  },
+  {
+    "name": "fone",
+    "dbType": "string",
+    "htmlType": "hidden",
+    "searchable": false,
+    "inForm": false,
+    "inIndex": false,
+    "inView": false
+  },
+  {
+    "name": "transport_id",
+    "dbType": "integer:unsigned:default,0:foreign,transports,id",
+    "htmlType": "text",
+    "relation": "mt1,Transport,transport_id,id"
+  },
+  {
+    "name": "created_at",
+    "dbType": "timestamp",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": false,
+    "inForm": false,
+    "inIndex": false
+  },
+  {
+    "name": "updated_at",
+    "dbType": "timestamp",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": false,
+    "inForm": false,
+    "inIndex": false
+  },
+  {
+    "name": "deleted_at",
+    "dbType": "timestamp",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": false,
+    "inForm": false,
+    "inIndex": false
+  }
+]
