@@ -89,7 +89,7 @@ class UserAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id,CreateUserAPIRequest $request)
+    public function update($id, UpdateUserAPIRequest $request)
     {
         $input = $request->all();
         /** @var User $user */

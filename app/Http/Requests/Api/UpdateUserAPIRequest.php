@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 use InfyOm\Generator\Request\APIRequest;
 
 class UpdateUserAPIRequest extends APIRequest
@@ -25,7 +26,7 @@ class UpdateUserAPIRequest extends APIRequest
     public function rules()
     {
         $rules = User::$rules;
-        
-        return $rules;
+        return Arr::except($rules, 'email');
+
     }
 }
