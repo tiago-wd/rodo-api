@@ -14,18 +14,26 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('login', 'AuthController@login');
-    Route::post('register', 'AuthController@signup');
-    Route::get('signup/activate/{token}', 'AuthController@signupActivate');
+    Route::post('login', '\App\Http\Controllers\AuthController@login');
+    Route::post('register', '\App\Http\Controllers\AuthController@signup');
+    Route::get('signup/activate/{token}', '\App\Http\Controllers\AuthController@signupActivate');
   
     Route::group(['middleware' => 'auth:api'], function() {
-        Route::get('logout', 'AuthController@logout');
-        Route::get('user', 'AuthController@user');
+        Route::get('logout', '\App\Http\Controllers\AuthController@logout');
+        Route::get('user', '\App\Http\Controllers\AuthController@user');
     });
 });
 
 Route::group(['prefix' => 'password'], function () {    
-    Route::post('create', 'PasswordResetController@create');
-    Route::get('find/{token}', 'PasswordResetController@find');
-    Route::post('reset', 'PasswordResetController@reset');
+    Route::post('create', '\App\Http\Controllers\PasswordResetController@create');
+    Route::get('find/{token}', '\App\Http\Controllers\PasswordResetController@find');
+    Route::post('reset', '\App\Http\Controllers\PasswordResetController@reset');
 });
+
+Route::group(['prefix' => 'users'], function () {    
+    Route::get('/', 'UserAPIController@index');
+    Route::post('/', 'UserAPIController@store');
+    Route::get('/{id}', 'UserAPIController@show');
+    Route::put('/{id}', 'UserAPIController@update');
+
+});    
