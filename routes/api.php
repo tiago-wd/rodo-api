@@ -44,3 +44,11 @@ Route::group(['prefix' => 'transport_types'], function () {
     Route::get('/{id}', 'TransportTypeAPIController@show');
     // Route::put('/{id}', 'TransportTypeAPIController@update');
 });    
+
+Route::group(['prefix' => 'transports'], function () {    
+    Route::get('/', 'TransportAPIController@index');
+    Route::post('/', 'TransportAPIController@store');
+    Route::get('/{id}', 'TransportAPIController@show');
+    Route::put('/{id}', 'TransportAPIController@update');
+    Route::delete('/{id}', 'TransportAPIController@destroy');
+});

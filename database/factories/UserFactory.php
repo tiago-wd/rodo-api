@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Models\Transport;
 use App\Models\User;
 use Faker\Generator as Faker;
 
@@ -121,7 +122,7 @@ $factory->define(User::class, function (Faker $faker) {
         'cnh' => $faker->ein,
         'identity_number' => $faker->ein,
         'fone' => $faker->e164PhoneNumber,
-        'transport_id' => null,
+        'transport_id' => (rand(1,10) <= 4) ? Transport::all()->random() : null,
         'active' => true,
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
