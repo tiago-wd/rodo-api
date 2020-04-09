@@ -113,7 +113,7 @@ class CreateDbRodofrete extends Migration
             $table->string('cnh', 24)->after('email')->nullable();
             $table->string('identity_number', 24)->after('cnh')->nullable();
             $table->string('fone', 24)->after('fone')->nullable();
-            $table->point('geopoint', 'GEOMETRY', 4326);
+            $table->point('geopoint', 'GEOMETRY', 4326)->nullable();
         });
 
         Schema::create('bids', function (Blueprint $table) {
