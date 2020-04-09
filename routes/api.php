@@ -37,3 +37,10 @@ Route::group(['prefix' => 'users'], function () {
     Route::put('/{id}', 'UserAPIController@update');
 
 });    
+
+Route::group(['prefix' => 'transport_types'], function () {    
+    Route::get('/', 'TransportTypeAPIController@index');
+    // Route::post('/', 'TransportTypeAPIController@store');
+    Route::get('/{id}', 'TransportTypeAPIController@show');
+    // Route::put('/{id}', 'TransportTypeAPIController@update');
+});    
