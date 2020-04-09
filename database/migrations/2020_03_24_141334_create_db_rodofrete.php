@@ -113,6 +113,7 @@ class CreateDbRodofrete extends Migration
             $table->string('cnh', 24)->after('email')->nullable();
             $table->string('identity_number', 24)->after('cnh')->nullable();
             $table->string('fone', 24)->after('fone')->nullable();
+            $table->point('geopoint', 'GEOMETRY', 4326);
         });
 
         Schema::create('bids', function (Blueprint $table) {
@@ -149,6 +150,7 @@ class CreateDbRodofrete extends Migration
             $table->dropColumn('cnh');
             $table->dropColumn('identity_number');
             $table->dropColumn('fone');
+            $table->dropColumn('geopoint');
         });
         Schema::dropIfExists('bids');
         Schema::dropIfExists('transports');
