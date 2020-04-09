@@ -35,7 +35,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/', 'UserAPIController@store');
     Route::get('/{id}', 'UserAPIController@show');
     Route::put('/{id}', 'UserAPIController@update');
-
+    Route::delete('/{id}', 'UserAPIController@destroy');
 });    
 
 Route::group(['prefix' => 'transport_types'], function () {    
