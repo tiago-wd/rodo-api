@@ -55,7 +55,7 @@ class CreateDbRodofrete extends Migration
         Schema::create("cargos", function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->float('weight', 8, 8);
             $table->float('price', 8, 2)->nullable();
             $table->point('from_where', 'GEOMETRY', 4326);

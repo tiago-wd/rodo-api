@@ -14,3 +14,7 @@
     <a href="{{ route('cargoTypes.index') }}"><i class="fa fa-edit"></i><span>Cargo Types</span></a>
 </li>
 
+<li class="{{ Request::is('cargos*') ? 'active' : '' }}">
+    <a href="{{ route('cargos.index') }}"><i class="fa fa-edit"></i><span>Cargos</span></a>
+</li>
+

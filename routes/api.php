@@ -58,4 +58,12 @@ Route::group(['prefix' => 'cargo_types'], function () {
     // Route::post('/', 'CargoTypeAPIController@store');
     Route::get('/{id}', 'CargoTypeAPIController@show');
     // Route::put('/{id}', 'CargoTypeAPIController@update');
-});    
+});
+
+Route::group(['prefix' => 'cargos'], function () {    
+    Route::get('/', 'CargoAPIController@index');
+    Route::post('/', 'CargoAPIController@store');
+    Route::get('/{id}', 'CargoAPIController@show');
+    Route::put('/{id}', 'CargoAPIController@update');
+    Route::delete('/{id}', 'CargoAPIController@destroy');
+});
