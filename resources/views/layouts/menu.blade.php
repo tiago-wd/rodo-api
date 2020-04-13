@@ -10,3 +10,7 @@
     <a href="{{ route('transports.index') }}"><i class="fa fa-edit"></i><span>Transports</span></a>
 </li>
 
+<li class="{{ Request::is('cargoTypes*') ? 'active' : '' }}">
+    <a href="{{ route('cargoTypes.index') }}"><i class="fa fa-edit"></i><span>Cargo Types</span></a>
+</li>
+

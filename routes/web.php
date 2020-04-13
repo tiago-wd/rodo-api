@@ -29,3 +29,5 @@ Route::resource('users', 'UserController');
 Route::resource('transportTypes', 'TransportTypeController');
 
 Route::resource('transports', 'TransportController');
+
+Route::resource('cargoTypes', 'CargoTypeController');
