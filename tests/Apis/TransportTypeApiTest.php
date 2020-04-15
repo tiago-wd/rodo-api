@@ -13,17 +13,18 @@ class TransportTypeApiTest extends TestCase
     /**
      * @test
      */
-    public function test_create_transport_type()
-    {
-        $transportType = factory(TransportType::class)->make()->toArray();
+    // Not necessary at the moment
+    // public function test_create_transport_type()
+    // {
+    //     $transportType = factory(TransportType::class)->make()->toArray();
 
-        $this->response = $this->json(
-            'POST',
-            '/api/transport_types', $transportType
-        );
+    //     $this->response = $this->json(
+    //         'POST',
+    //         '/api/transport_types', $transportType
+    //     );
 
-        $this->assertApiResponse($transportType);
-    }
+    //     $this->assertApiResponse($transportType);
+    // }
 
     /**
      * @test
@@ -43,38 +44,40 @@ class TransportTypeApiTest extends TestCase
     /**
      * @test
      */
-    public function test_update_transport_type()
-    {
-        $transportType = factory(TransportType::class)->create();
-        $editedTransportType = factory(TransportType::class)->make()->toArray();
+    // Not necessary at the moment
+    // public function test_update_transport_type()
+    // {
+    //     $transportType = factory(TransportType::class)->create();
+    //     $editedTransportType = factory(TransportType::class)->make()->toArray();
 
-        $this->response = $this->json(
-            'PUT',
-            '/api/transport_types/'.$transportType->id,
-            $editedTransportType
-        );
+    //     $this->response = $this->json(
+    //         'PUT',
+    //         '/api/transport_types/'.$transportType->id,
+    //         $editedTransportType
+    //     );
 
-        $this->assertApiResponse($editedTransportType);
-    }
+    //     $this->assertApiResponse($editedTransportType);
+    // }
 
     /**
      * @test
      */
-    public function test_delete_transport_type()
-    {
-        $transportType = factory(TransportType::class)->create();
+    // Not necessary at the moment
+    // public function test_delete_transport_type()
+    // {
+    //     $transportType = factory(TransportType::class)->create();
 
-        $this->response = $this->json(
-            'DELETE',
-             '/api/transport_types/'.$transportType->id
-         );
+    //     $this->response = $this->json(
+    //         'DELETE',
+    //          '/api/transport_types/'.$transportType->id
+    //      );
 
-        $this->assertApiSuccess();
-        $this->response = $this->json(
-            'GET',
-            '/api/transport_types/'.$transportType->id
-        );
+    //     $this->assertApiSuccess();
+    //     $this->response = $this->json(
+    //         'GET',
+    //         '/api/transport_types/'.$transportType->id
+    //     );
 
-        $this->response->assertStatus(404);
-    }
+    //     $this->response->assertStatus(404);
+    // }
 }
