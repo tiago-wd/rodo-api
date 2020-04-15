@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Relationship\CargoRelationship;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -24,7 +25,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Cargo extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,
+        CargoRelationship;
 
     public $table = 'cargos';
     
@@ -75,27 +77,4 @@ class Cargo extends Model
         'to_where' => 'required'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function cargoType()
-    {
-        return $this->belongsTo(\App\Models\CargoType::class, 'cargo_type_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function user()
-    {
-        return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     **/
-    public function bids()
-    {
-        return $this->hasMany(\App\Models\Bid::class, 'cargo_id', 'id');
-    }
 }

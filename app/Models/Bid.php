@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Relationship\BidRelationship;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -21,7 +22,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Bid extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,
+        BidRelationship;
 
     public $table = 'bids';
     
@@ -61,27 +63,4 @@ class Bid extends Model
         'bid_status' => 'required'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function cargo()
-    {
-        return $this->belongsTo(\App\Models\Cargo::class, 'cargo_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function user()
-    {
-        return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function driver()
-    {
-        return $this->belongsTo(\App\Models\User::class, 'driver_id', 'id');
-    }
 }

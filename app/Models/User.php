@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Attribute\UserAttribute;
+use App\Models\Traits\Relationship\UserRelationship;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
-use Storage;
 
 /**
  * Class User
@@ -32,7 +33,9 @@ use Storage;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable, SoftDeletes;
+    use HasApiTokens, Notifiable, SoftDeletes,
+        UserRelationship,
+        UserAttribute;
 
     public $table = 'users';
     
@@ -92,33 +95,5 @@ class User extends Authenticatable
     ];
 
     protected $appends = ['avatar_url'];
-    
-    public function getAvatarUrlAttribute()
-    {
-        return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
-    }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function transport()
-    {
-        return $this->belongsTo(\App\Models\Transport::class, 'transport_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function cargos()
-    {
-        return $this->belongsTo(\App\Models\Cargo::class, 'cargos', 'cargo_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     **/
-    public function roles()
-    {
-        return $this->belongsToMany(\App\Models\Role::class, 'user_roles', 'user_id', 'role_id');
-    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Relationship\TransportTypeRelationship;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,7 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class TransportType extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,
+        TransportTypeRelationship;
 
     public $table = 'transport_types';
     
@@ -47,20 +49,4 @@ class TransportType extends Model
     public static $rules = [
         'name' => 'required'
     ];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     **/
-    public function transports()
-    {
-        return $this->hasMany(\App\Models\Transport::class, 'transport_type_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     **/
-    public function cargoTransports()
-    {
-        return $this->belongsToMany(\App\Models\CargoTransport::class, 'cargo_transports', 'cargo_type_id', 'transport_type_id');
-    }
 }
