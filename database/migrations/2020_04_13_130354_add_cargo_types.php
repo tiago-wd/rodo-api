@@ -22,9 +22,9 @@ class AddCargoTypes extends Migration
             'Carga Perigosa',
         ];
 
-        foreach($cargoTypes as $cargoType) {
+        array_map(function ($cargoType) {
             CargoType::create(['name' => $cargoType]);
-        }
+        }, $cargoTypes);
     }
 
     /**

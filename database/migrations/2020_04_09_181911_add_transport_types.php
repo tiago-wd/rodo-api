@@ -26,9 +26,9 @@ class AddTransportTypes extends Migration
             'Operacional de apoio (veículo leve)'
         ];
 
-        foreach($transportTypes as $transportType) {
+        array_map(function ($transportType) {
             TransportType::create(['name' => $transportType]);
-        }
+        }, $transportTypes);
     }
 
     /**
