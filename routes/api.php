@@ -67,3 +67,11 @@ Route::group(['prefix' => 'cargos'], function () {
     Route::put('/{id}', 'CargoAPIController@update');
     Route::delete('/{id}', 'CargoAPIController@destroy');
 });
+
+Route::group(['prefix' => 'bids'], function () {    
+    Route::get('/', 'BidAPIController@index');
+    Route::post('/', 'BidAPIController@store');
+    Route::get('/{id}', 'BidAPIController@show');
+    Route::put('/{id}', 'BidAPIController@update');
+    Route::delete('/{id}', 'BidAPIController@destroy');
+});

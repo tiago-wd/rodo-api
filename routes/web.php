@@ -33,3 +33,5 @@ Route::resource('transports', 'TransportController');
 Route::resource('cargoTypes', 'CargoTypeController');
 
 Route::resource('cargos', 'CargoController');
+
+Route::resource('bids', 'BidController');

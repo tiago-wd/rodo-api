@@ -18,3 +18,7 @@
     <a href="{{ route('cargos.index') }}"><i class="fa fa-edit"></i><span>Cargos</span></a>
 </li>
 
+<li class="{{ Request::is('bids*') ? 'active' : '' }}">
+    <a href="{{ route('bids.index') }}"><i class="fa fa-edit"></i><span>Bids</span></a>
+</li>
+

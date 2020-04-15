@@ -12,22 +12,33 @@
     "inView": false
   },
   {
-    "name": "cargo",
+    "name": "cargo_id",
     "dbType": "integer:unsigned:default,0:foreign,cargos,id",
     "htmlType": "text",
     "relation": "mt1,Cargo,cargo_id,id"
   },
   {
-    "name": "user",
+    "name": "user_id",
     "dbType": "integer:unsigned:default,0:foreign,users,id",
     "htmlType": "text",
     "relation": "mt1,User,user_id,id"
   },
   {
-    "name": "driver",
+    "name": "driver_id",
     "dbType": "integer:unsigned:default,0:foreign,drivers,id",
     "htmlType": "text",
     "relation": "mt1,User,driver_id,id"
+  },
+  {
+    "name": "bid_status",
+    "dbType": "string",
+    "validations": "required",
+    "htmlType": "select,Negociando:Negociando, Negado:Negado, Aceito:Aceito, Em Andamento:Em Andamento, Finalizado:Finalizado"
+  },
+  {
+    "name": "status",
+    "dbType": "string",
+    "htmlType": "text"
   },
   {
     "name": "created_at",

@@ -130,7 +130,7 @@ class CreateDbRodofrete extends Migration
 
             $table->enum('bid_status', ['Negociando', 'Negado', 'Aceito', 'Em Andamento', 'Finalizado']);
 
-            $table->string('status');
+            $table->string('status')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
