@@ -70,14 +70,15 @@ class UserAPIController extends AppBaseController
      */
     public function show($id)
     {
+        $with = request()->get('with') ?? [];
         /** @var User $user */
         $user = $this->userRepository->find($id);
-
+        
         if (empty($user)) {
             return $this->sendError('User not found');
         }
 
-        return $this->sendResponse($user->toArray(), 'User retrieved successfully');
+        return $this->sendResponse($user->load($with)->toArray(), 'User retrieved successfully');
     }
 
     /**

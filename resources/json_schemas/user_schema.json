@@ -115,7 +115,7 @@
   {
     "name": "cargos",
     "type": "relation",
-    "relation": "mt1,Cargo,cargos,cargo_id,id"
+    "relation": "1tm,Cargo,user_id,id"
   },
   {
     "name": "users",

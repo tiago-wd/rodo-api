@@ -20,7 +20,7 @@ trait UserRelationship
      **/
     public function cargos()
     {
-        return $this->belongsTo(\App\Models\Cargo::class, 'cargos', 'cargo_id', 'id');
+        return $this->hasMany(\App\Models\Cargo::class, 'user_id', 'id');
     }
 
     /**
